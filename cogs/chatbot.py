@@ -109,6 +109,7 @@ class ChatBotCog(commands.Cog):
     @commands.hybrid_command(description="Purge messages in the channel")
     @app_commands.describe(limit="The number of messages to delete")
     async def purge(self, ctx: commands.Context, limit: int = 1):
+        await ctx.interaction.response.defer(ephemeral=True)
         deleted = await ctx.channel.purge(limit=limit)
         await ctx.send(f"Deleted {len(deleted)} messages", ephemeral=True)
 
