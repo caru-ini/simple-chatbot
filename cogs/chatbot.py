@@ -46,9 +46,9 @@ class ChatBotCog(commands.Cog):
     async def chat(self, ctx: commands.Context, message: str, window: Optional[int] = 10):
         await ctx.interaction.response.defer()
 
-        messages = [ctx.message]
+        messages = [message]
         if window > 0:
-            messages.append(v async for v in ctx.channel.history(limit=window, oldest_first=True, before=ctx.message))
+            messages.append(*[v async for v in ctx.channel.history(limit=window, oldest_first=True, before=ctx.message)])
 
         chatbot = self.get_chatbot(ctx.channel.id)
         response = await chatbot.chat(messages)
@@ -74,7 +74,7 @@ class ChatBotCog(commands.Cog):
     )
     @app_commands.describe(
         window="The number of messages to include in the summary",
-        private="Whether to show the summary only to you"    
+        private="Whether to show the summary only to you"
     )
     async def summary(self, ctx: commands.Context, window: Optional[int] = 50, private: Optional[bool] = False):
         await ctx.interaction.response.defer(ephemeral=True)
