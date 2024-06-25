@@ -17,8 +17,6 @@ CHAT_MODEL = os.getenv('CHAT_MODEL', 'gpt-4-turbo-preview')
 ASK_MODEL = os.getenv('ASK_MODEL', 'gpt-4-turbo-preview')
 SUMMARY_MODEL = os.getenv('SUMMARY_MODEL', 'gpt-3.5-turbo-16k')
 
-openai.base_url = os.getenv('OPENAI_API_BASE', 'https://api.openai.com')
-
 chat_prompt = Path('./prompts/chat.txt').read_text(encoding='utf-8')
 ask_prompt = Path('./prompts/ask.txt').read_text(encoding='utf-8')
 summary_prompt = Path('./prompts/summary.txt').read_text(encoding='utf-8')
